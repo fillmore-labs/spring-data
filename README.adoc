@@ -1,0 +1,105 @@
+= Spring Data Playground
+:toc: macro
+ifdef::env-github[]
+:note-caption: :information_source:
+:tip-caption: :bulb:
+endif::[]
+
+image:https://badge.buildkite.com/0b66b861256a681dca0dcdd33cfe426ff3f50a923b10067d7e.svg?branch=main[title="Buildkite build status",link=https://buildkite.com/fillmore-labs/spring-data-playground]
+image:https://img.shields.io/github/license/fillmore-labs/spring-data[title="License",link=https://github.com/fillmore-labs/spring-data/blob/main/LICENSE]
+
+toc::[]
+
+== Structure
+
+=== Spring Configuration
+
+https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#using-boot-configuration-classes[Spring Boot]
+is configured in
+`link:src/main/java/com/fillmore_labs/example/spring_data/main/[com.fillmore_labs.example.spring_data.main]`.
+`link:src/main/java/com/fillmore_labs/example/spring_data/main/DatabaseConfiguration.java[DatabaseConfiguration]`
+is separated to be easily referenced in
+link:src/test/java/com/fillmore_labs/example/spring_data/repository/[tests].
+
+TIP: For a more fine-grained approach and a little extra speed, and we use `...Marker`-classes (see
+https://docs.spring.io/spring-boot/docs/current/api/org/springframework/boot/autoconfigure/SpringBootApplication.html#scanBasePackageClasses--[basePackageClasses])
+and
+`https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-scanning-index[spring-context-indexer]`.
+
+=== Application Configuration
+
+The Application is configured in
+`link:src/main/java/com/fillmore_labs/example/spring_data/config/[com.fillmore_labs.example.spring_data.config]`,
+currently only used in
+`link:src/main/java/com/fillmore_labs/example/spring_data/runner/HelloWorld.java[HelloWorld]`.
+
+It's just an example to demonstrate custom typesafe,
+`https://errorprone.info/api/latest/com/google/errorprone/annotations/Immutable.html[@Immutable]`
+configuration with Spring.
+
+TIP: Since a configuration is a
+https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/beans/package-summary.html[Spring Bean],
+we can either use https://beanvalidation.org/2.0/[Jakarta Bean Validation 2.0], or the parameters
+could be validated in the constructor.
+
+=== Jakarta Persistence
+
+We use https://jakarta.ee/specifications/persistence/2.2/[Jakarta Persistence 2.2] with
+http://www.querydsl.com/static/querydsl/latest/reference/html/ch02.html#jpa_integration[Querydsl],
+entities are in
+`link:src/main/java/com/fillmore_labs/example/spring_data/entity/[com.fillmore_labs.example.spring_data.entity]`.
+
+NOTE: For `equals()` and `hashCode()` see xref:_literature[the references].
+
+=== Spring Data
+
+https://docs.spring.io/spring-data/rest/docs/current/reference/html/#repository-resources[Spring Data REST]
+repositories are defined in
+`link:src/main/java/com/fillmore_labs/example/spring_data/repository/[com.fillmore_labs.example.spring_data.repository]`
+and are automatically exported.
+
+== Running
+
+=== Prerequisites
+
+You need https://github.com/bazelbuild/bazelisk[Bazelisk] installed, with https://brew.sh[HomeBrew]
+just use [source,shell]`brew install bazelbuild/tap/bazelisk`.
+See also https://docs.bazel.build/versions/4.0.0/install-bazelisk.html[Installing Bazel using
+Bazelisk].
+
+=== Main App
+
+The main app simply runs two
+`https://docs.spring.io/spring-boot/docs/current/api/org/springframework/boot/CommandLineRunner.html[CommandLineRunner]s`,
+`link:src/main/java/com/fillmore_labs/example/spring_data/runner/HelloWorld.java[HelloWorld]` and
+`link:src/main/java/com/fillmore_labs/example/spring_data/runner/Create.java[Create]`:
+
+[source,shell]
+----
+bazel run //:spring-data
+----
+
+When you want to try the REST API,
+https://docs.spring.io/spring-data/rest/docs/current/reference/html/#tools[Spring Data REST HAL Explorer]
+at http://127.0.0.1:8080/ and the H2 console at http://127.0.0.1:8080/h2-console (`JDBC URL` is
+`jdbc:h2:mem:testdb`), run
+
+[source,shell]
+----
+bazel run //:spring-data-rest
+----
+
+=== Tests
+
+To run all tests, use
+
+[source,shell]
+----
+bazel test //...
+----
+
+[#_literature]
+== Literature
+
+- https://web.archive.org/web/20171211235806/http://www.onjava.com/pub/a/onjava/2006/09/13/dont-let-hibernate-steal-your-identity.html[Don't Let Hibernate Steal Your Identity]
+- https://developer.jboss.org/docs/DOC-13933[Equals and HashCode]

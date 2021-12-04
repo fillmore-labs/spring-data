@@ -1,0 +1,15 @@
+.*
+!/.bazelrc
+!/.bazelversion
+!/.buildkite
+!/.editorconfig
+!/.envrc
+!/.gitattributes
+!/.github/
+!/.gitignore
+!/.yamllint
+# idea
+/*.iml
+out/
+# project specific
+/bazel-*

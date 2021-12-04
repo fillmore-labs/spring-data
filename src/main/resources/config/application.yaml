@@ -1,0 +1,34 @@
+---  # Spring Boot configuration
+spring:
+  application:
+    name: Spring Data Playground
+  main:
+    banner-mode: false
+    lazy-initialization: true
+  profiles:
+    active: default
+---  # Configuration for 'default' profile
+spring:
+  config:
+    activate:
+      on-profile: default
+  data:
+    rest:
+      detection-strategy: annotated
+  datasource:
+    driver-class-name: org.h2.Driver
+    generate-unique-name: false
+    initialization-mode: embedded
+    sql-script-encoding: UTF-8
+  h2:
+    console:
+      enabled: true
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+hello:
+  name: World

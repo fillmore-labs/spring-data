@@ -1,0 +1,23 @@
+---  # Log4j2 test configuration
+Configuration:
+  status: INFO
+
+  Appenders:
+    Console:
+      name: Console
+      target: SYSTEM_ERR
+      PatternLayout:
+        pattern: "%d{ABSOLUTE_MICROS} %p %c [%t] %m %ex{short}%n"
+
+  Loggers:
+    logger:
+      - name: com.fillmore_labs.example
+        level: DEBUG
+        additivity: false
+        AppenderRef:
+          ref: Console
+
+    Root:
+      level: INFO
+      AppenderRef:
+        ref: Console

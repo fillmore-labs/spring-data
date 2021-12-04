@@ -1,0 +1,28 @@
+---  # Log4j2 configuration
+Configuration:
+  status: INFO
+
+  Appenders:
+    Console:
+      name: Console
+      target: SYSTEM_ERR
+      PatternLayout:
+        pattern: "%d{ABSOLUTE_MICROS} %highlight{%p} %c{1.} [%t] %m %X %ex{short}%n"
+
+  Loggers:
+    logger:
+      - name: com.fillmore_labs.example
+        level: DEBUG
+        additivity: false
+        AppenderRef:
+          ref: Console
+      - name: org.springframework.boot.autoconfigure.logging
+        level: INFO
+        additivity: false
+        AppenderRef:
+          ref: Console
+
+    Root:
+      level: INFO
+      AppenderRef:
+        ref: Console

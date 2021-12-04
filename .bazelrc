@@ -1,0 +1,3 @@
+build --javabase=@bazel_tools//tools/jdk:remote_jdk11 --java_toolchain=//toolchain:toolchain_java11
+test --javabase=@bazel_tools//tools/jdk:remote_jdk11
+run --javabase=@bazel_tools//tools/jdk:remote_jdk11
