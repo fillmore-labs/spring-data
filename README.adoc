@@ -62,10 +62,30 @@ and are automatically exported.
 
 === Prerequisites
 
-You need https://github.com/bazelbuild/bazelisk[Bazelisk] installed, with https://brew.sh[HomeBrew]
-just use [source,shell]`brew install bazelbuild/tap/bazelisk`.
-See also https://docs.bazel.build/versions/4.0.0/install-bazelisk.html[Installing Bazel using
-Bazelisk].
+You need https://github.com/bazelbuild/bazelisk[Bazelisk] installed, see also
+https://docs.bazel.build/versions/main/install-bazelisk.html[Installing Bazel using Bazelisk].
+
+==== macOS
+
+Using https://brew.sh[HomeBrew] enter
+
+[source,shell]
+brew install bazelisk
+
+==== Windows
+
+Using https://chocolatey.org[Chocolatey] enter
+
+[source,shell]
+choco install bazelisk
+
+Enable developer mode:
+
+. Open Windows settings
+. Go to “Update & security”, then “For developers”
+. Under “Developer Mode” section enable “Install apps from any source, including loose files”.
+
+or run with administrator privileges.
 
 === Main App
 
@@ -76,7 +96,7 @@ The main app simply runs two
 
 [source,shell]
 ----
-bazel run //:spring-data
+bazelisk run //:spring-data
 ----
 
 When you want to try the REST API,
@@ -86,7 +106,7 @@ at http://127.0.0.1:8080/ and the H2 console at http://127.0.0.1:8080/h2-console
 
 [source,shell]
 ----
-bazel run //:spring-data-rest
+bazelisk run //:spring-data-rest
 ----
 
 === Tests
@@ -95,7 +115,7 @@ To run all tests, use
 
 [source,shell]
 ----
-bazel test //...
+bazelisk test //src/test/...
 ----
 
 [#_literature]
