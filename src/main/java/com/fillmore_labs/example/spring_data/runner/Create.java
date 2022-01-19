@@ -7,6 +7,7 @@ import javax.annotation.Priority;
 import javax.inject.Inject;
 import javax.inject.Named;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.dao.DataAccessException;
 
 @Named
 @Priority(20)
@@ -16,7 +17,7 @@ public final class Create implements CommandLineRunner {
   private final PersonRepository people;
 
   @Inject
-  public Create(PersonRepository people) {
+  /* package */ Create(PersonRepository people) {
     this.people = people;
   }
 
@@ -26,7 +27,7 @@ public final class Create implements CommandLineRunner {
     try {
       var created = people.save(person);
       logger.atInfo().log("Created: %s", created);
-    } catch (Exception ex) {
+    } catch (DataAccessException ex) {
       logger.atWarning().withCause(ex).log("Creation failed");
     }
   }

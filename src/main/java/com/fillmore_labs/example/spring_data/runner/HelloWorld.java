@@ -13,7 +13,7 @@ public final class HelloWorld implements CommandLineRunner {
   private final String name;
 
   @Inject
-  public HelloWorld(HelloConfiguration config) {
+  /* package */ HelloWorld(HelloConfiguration config) {
     this.name = config.name();
   }
 

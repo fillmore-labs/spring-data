@@ -14,7 +14,7 @@ public final class LogPort implements CommandLineRunner {
   private final int port;
 
   @Inject
-  public LogPort(@LocalServerPort int port) {
+  /* package */ LogPort(@LocalServerPort int port) {
     this.port = port;
   }
 
