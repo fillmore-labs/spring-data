@@ -60,7 +60,7 @@ maven_install(
         "org.springframework.data:spring-data-rest-webmvc:3.6.1",
         "org.springframework:spring-context-indexer:5.3.15",
         "org.springframework:spring-core:5.3.15",
-        "org.springframework:spring-dao:2.0.8",
+        "org.springframework:spring-tx:5.3.15",
         maven.artifact(
             artifact = "jetty-webapp",
             exclusions = ["org.slf4j:slf4j-api"],  # depends on 'org.slf4j:slf4j-api:2.0.0-alpha5'

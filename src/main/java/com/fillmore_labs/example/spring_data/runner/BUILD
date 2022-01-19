@@ -18,6 +18,6 @@ java_library(
         "@maven//:org_springframework_boot_spring_boot",
         "@maven//:org_springframework_boot_spring_boot_autoconfigure",
         "@maven//:org_springframework_spring_core",
-        "@maven//:org_springframework_spring_dao",
+        "@maven//:org_springframework_spring_tx",
     ],
 )
